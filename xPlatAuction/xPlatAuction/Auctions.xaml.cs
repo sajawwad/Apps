@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
+using Microsoft.WindowsAzure.MobileServices;
 using Xamarin.Forms;
 
 namespace xPlatAuction
@@ -14,7 +15,10 @@ namespace xPlatAuction
 
 		public async void Button_Clicked(object sender, EventArgs e)
 		{
-			//await MobileServiceClient client = new MobileServiceClient ("http://");
+			 var client = new MobileServiceClient ("http://");
+
+		    var todoItems = await client.GetTable<ToDoItem>().ReadAsync();
+		    message.Text = todoItems.First().Text;
 
 		}
 	}
