@@ -15,7 +15,7 @@ namespace xPlatAuction
 
 		public async void Button_Clicked(object sender, EventArgs e)
 		{
-			 var client = new MobileServiceClient ("http://");
+			 var client = new MobileServiceClient ("http://10.0.2.2//xPlatAuctionT/");
 
 		    var todoItems = await client.GetTable<ToDoItem>().ReadAsync();
 		    message.Text = todoItems.First().Text;
