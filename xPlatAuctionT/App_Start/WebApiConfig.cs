@@ -6,6 +6,7 @@ using System.Web.Http;
 using xPlatAuctionT.DataObjects;
 using xPlatAuctionT.Models;
 using Microsoft.WindowsAzure.Mobile.Service;
+using xPlatAuctionT.Entities;
 
 namespace xPlatAuctionT
 {
@@ -24,26 +25,28 @@ namespace xPlatAuctionT
             // config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
 
             Database.SetInitializer(new MobileServiceInitializer());
+
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<AuctionItem, AuctionItemDBEntity>();
+                cfg.CreateMap<AuctionItemDBEntity, AuctionItem>().ForMember(
+                    ai => ai.CurrentBid, map => map.UseValue(0.0));
+            });
         }
     }
 
+#if DEBUG
     public class MobileServiceInitializer : DropCreateDatabaseIfModelChanges<MobileServiceContext>
     {
         protected override void Seed(MobileServiceContext context)
         {
-            List<TodoItem> todoItems = new List<TodoItem>
-            {
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "First item", Complete = false },
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "Second item", Complete = false },
-            };
-
-            foreach (TodoItem todoItem in todoItems)
-            {
-                context.Set<TodoItem>().Add(todoItem);
-            }
 
             base.Seed(context);
         }
     }
+#else
+    public class MobileServiceInitializer : ClearDatabaseSchemaIfModelChanges<MobileServiceContext>
+    { }
+#endif
 }
 

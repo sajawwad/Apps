@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.WindowsAzure.Mobile.Service;
 using Microsoft.WindowsAzure.Mobile.Service.Tables;
 using xPlatAuctionT.DataObjects;
+using xPlatAuctionT.Entities;
 
 namespace xPlatAuctionT.Models
 {
@@ -41,6 +42,10 @@ namespace xPlatAuctionT.Models
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
+
+        public DbSet<Auction> Auctions { get; set; }
+        public DbSet<AuctionItemDBEntity> AuctionItems { get; set; }
+
     }
 
 }
