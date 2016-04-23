@@ -45,6 +45,7 @@ namespace xPlatAuctionT.Models
 
         public DbSet<Auction> Auctions { get; set; }
         public DbSet<AuctionItemDBEntity> AuctionItems { get; set; }
+        public DbSet<Bid> Bids { get; set; }
 
     }
 

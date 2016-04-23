@@ -9,10 +9,31 @@ namespace xPlatAuction
 {
     public class App : Application
     {
+        private static AuctionService azService;
+
         public App()
         {
             // The root page of your application
-            MainPage =  new Auctions();       
+            MainPage = new ContentPage();
+        }
+
+        public void LoadMainPage()
+        {
+            MainPage = new NavigationPage(new Auctions());
+        }
+        public static AuctionService GetAuctionService()
+        {
+            //return azService ??
+            //       (azService = new AuctionService("http://10.0.2.2/xPlatAuctionT/"));
+
+            //return azService ??
+            //       (azService = new AuctionService("http://169.254.80.80/xPlatAuctionT/"));
+
+            //return azService ??
+            //  (azService = new AuctionService("http://192.168.1.172/xPlatAuctionT/"));
+
+            return azService ??
+                   (azService = new AuctionService("https://xplatauctiont.azure-mobile.net"));
         }
 
         protected override void OnStart()

@@ -4,11 +4,13 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.OData;
 using Microsoft.WindowsAzure.Mobile.Service;
+using Microsoft.WindowsAzure.Mobile.Service.Security;
 using xPlatAuctionT.DataObjects;
 using xPlatAuctionT.Models;
 
 namespace xPlatAuctionT.Controllers
 {
+    [AuthorizeLevel(AuthorizationLevel.Anonymous)]
     public class BidController : TableController<Bid>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
@@ -39,8 +41,19 @@ namespace xPlatAuctionT.Controllers
         // POST tables/Bid
         public async Task<IHttpActionResult> PostBid(Bid item)
         {
-            Bid current = await InsertAsync(item);
-            return CreatedAtRoute("Tables", new { id = current.Id }, current);
+          //  var user = this.User as ServiceUser;
+
+            //if (user != null && user.Id != null)
+            {
+                item.Bidder = "jawad";
+                var current = await InsertAsync(item);
+                return CreatedAtRoute("Tables", new {id = current.Id}, current);
+            }
+            //else
+            //{
+            //    Services.Log.Info("identity is not present");
+            //    return base.StatusCode(System.Net.HttpStatusCode.BadRequest);
+            //}
         }
 
         // DELETE tables/Bid/48D68C86-6EA6-4C25-AA33-223FC9A27959

@@ -36,11 +36,27 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Auction.cs" />
+    <Compile Include="AuctionItem.cs" />
+    <Compile Include="AuctionItems.xaml.cs">
+      <DependentUpon>AuctionItems.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AuctionService.cs" />
+    <Compile Include="Bid.cs" />
+    <Compile Include="MyAuctionItem.cs" />
+    <Compile Include="PlaceBid.xaml.cs">
+      <DependentUpon>PlaceBid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToDoItem.cs" />
     <Compile Include="Auctions.xaml.cs">
       <DependentUpon>Auctions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AuctionItemsViewModel.cs" />
+    <Compile Include="ViewModel\AuctionsViewModel.cs" />
+    <Compile Include="ViewModel\DelegateCommand.cs" />
+    <Compile Include="ViewModel\PlaceBidViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.WindowsAzure.Mobile, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -92,6 +108,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Auctions.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AuctionItems.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PlaceBid.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
